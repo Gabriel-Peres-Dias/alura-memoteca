@@ -23,8 +23,4 @@ export class CriarPensamentoComponent implements OnInit {
     alert('criquei crias');
   }
 
-  public cancelar(): void {
-    alert('cancelado');
-  }
-
 }
