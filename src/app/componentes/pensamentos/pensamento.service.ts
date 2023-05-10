@@ -17,7 +17,7 @@ export class PensamentoService {
     return this.http.post<Pensamento>(this.API, pensamento);
   }
 
-  public listar(pagina: number, filtro: string): Observable<Pensamento[]> {
+  public listar(pagina: number, filtro: string, favoritos: boolean): Observable<Pensamento[]> {
     const itensPorPagina = 6;
     let params = new HttpParams()
       .set("_page", pagina)
@@ -26,6 +26,10 @@ export class PensamentoService {
       //trim remove espaços vazios
       if (filtro.trim().length > 2) {
         params = params.set("q", filtro);
+      }
+
+      if (favoritos) {
+        params = params.set("favorito", true);
       }
     // caso a variavel tenha o mesmo nome que a outra eu posso omitir
     return this.http.get<Pensamento[]>(this.API, { params });
